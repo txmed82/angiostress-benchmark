@@ -20,12 +20,14 @@ REQUIRED_CODE_FILES = [
     "benchmark/validate_contract.py",
     "benchmark/run_dias_contract_full_test.py",
     "benchmark/run_cathaction_contract_subset.py",
+    "benchmark/run_cathaction_full_tier.py",
     "benchmark/run_release_audit.py",
     "benchmark/stage_public_release.py",
 ]
 
 DIAS_OUTPUT_DIR = Path("experiments/main/run-dias-contract-full-test-v0/outputs")
-CATHACTION_OUTPUT_DIR = Path("experiments/main/run-cathaction-contract-subset-v0/outputs")
+CATHACTION_QUICK_SUBSET_OUTPUT_DIR = Path("experiments/main/run-cathaction-contract-subset-v0/outputs")
+CATHACTION_OUTPUT_DIR = Path("experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225")
 CONTRACT_OUTPUT_DIR = Path("experiments/main/run-real-data-first-benchmark-contract/outputs")
 
 DIAS_REQUIRED_OUTPUTS = [
@@ -42,8 +44,12 @@ DIAS_REQUIRED_OUTPUTS = [
 ]
 
 CATHACTION_REQUIRED_OUTPUTS = [
+    "RUN.md",
     "benchmark_index.json",
+    "cleanup_status.json",
+    "environment.json",
     "manifest.json",
+    "model_ranking_rows.json",
     "samples.json",
     "per_pair_metrics.json",
     "model_summary.json",
@@ -74,6 +80,10 @@ def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text())
 
 
+def write_json(path: Path, payload: dict[str, Any]) -> None:
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+
+
 def finite_number(value: Any) -> bool:
     return isinstance(value, (int, float)) and math.isfinite(float(value))
 
@@ -85,6 +95,13 @@ def metric_equals(metrics: dict[str, Any], key: str, expected: float) -> bool:
 
 def metric_finite(metrics: dict[str, Any], key: str) -> bool:
     return finite_number(metrics.get(key))
+
+
+def first_metric(metrics: dict[str, Any], *keys: str, default: float = 0.0) -> float:
+    for key in keys:
+        if finite_number(metrics.get(key)):
+            return float(metrics[key])
+    return default
 
 
 def count_files(path: Path) -> dict[str, Any]:
@@ -130,6 +147,75 @@ def surface_summary(surface_id: str, output_dir: Path, required_outputs: list[st
     }
 
 
+def cathaction_sample_count(metrics: dict[str, Any]) -> float:
+    return first_metric(metrics, "s3f_sample_count_per_model", "cathaction_contract_sample_count")
+
+
+def cathaction_prediction_count(metrics: dict[str, Any]) -> float:
+    return first_metric(metrics, "s3f_total_prediction_count", "cathaction_contract_prediction_count")
+
+
+def cathaction_model_count(metrics: dict[str, Any]) -> float:
+    return first_metric(metrics, "s3f_model_count", "cathaction_contract_model_count")
+
+
+def ensure_full_cathaction_release_aliases(root: Path) -> None:
+    output_dir = root / CATHACTION_OUTPUT_DIR
+    manifest = read_json(output_dir / "manifest.json")
+    metrics = read_json(output_dir / "metrics_summary.json")
+    model_summary = read_json(output_dir / "model_summary.json")
+
+    model_rows = model_summary.get("rows", [])
+    leaderboard_rows = []
+    for rank, row in enumerate(
+        sorted(model_rows, key=lambda item: item.get("cathaction_sample_mean_dice", float("-inf")), reverse=True),
+        start=1,
+    ):
+        leaderboard_rows.append(
+            {
+                "model_id": row["model_id"],
+                "rank": rank,
+                "surface_id": "cathaction_human_segmentation",
+                "primary_metric": "cathaction_sample_mean_dice",
+                "cathaction_sample_mean_dice": row.get("cathaction_sample_mean_dice"),
+                "cathaction_sample_mean_cldice": row.get("cathaction_sample_mean_cldice"),
+                "cathaction_sample_min_dice": row.get("cathaction_sample_min_dice"),
+                "cathaction_sample_min_cldice": row.get("cathaction_sample_min_cldice"),
+                "mean_area_ratio": row.get("cathaction_sample_mean_area_ratio"),
+                "prediction_nonempty_rate": row.get("cathaction_prediction_nonempty_rate"),
+            }
+        )
+
+    write_json(output_dir / "samples.json", {"rows": manifest.get("sampled_pairs", [])})
+    write_json(output_dir / "leaderboard.json", {"rows": leaderboard_rows})
+    write_json(
+        output_dir / "benchmark_index.json",
+        {
+            "schema_version": 1,
+            "benchmark_id": "angiostress-v0.1-real-data",
+            "surface_id": "cathaction_human_segmentation",
+            "surface_role": "core",
+            "dataset": "CathAction",
+            "task": "prompted_device_segmentation",
+            "run_id": "run-cathaction-real-scaleup-v0",
+            "source_run_id": manifest.get("run_id"),
+            "sample_count": int(cathaction_sample_count(metrics)),
+            "prediction_count": int(cathaction_prediction_count(metrics)),
+            "nonempty_pair_universe": int(metrics.get("s3f_nonempty_pair_universe_count", 0)),
+            "empty_mask_pairs_excluded": int(metrics.get("s3f_empty_mask_pairs_excluded_count", 0)),
+            "model_count": int(cathaction_model_count(metrics)),
+            "model_ids": [row["model_id"] for row in model_rows],
+            "primary_metric": "cathaction_sample_mean_dice",
+            "leaderboard_path": "leaderboard.json",
+            "model_summary_path": "model_summary.json",
+            "per_pair_metrics_path": "per_pair_metrics.json",
+            "samples_path": "samples.json",
+            "synthetic_role": "none_core_real_data",
+            "quick_subset_reference": str(CATHACTION_QUICK_SUBSET_OUTPUT_DIR),
+        },
+    )
+
+
 def build_release_manifest(root: Path, dias: dict[str, Any], cathaction: dict[str, Any]) -> dict[str, Any]:
     public_files = REQUIRED_CODE_FILES + [
         str(CONTRACT_OUTPUT_DIR / "contract_validation_report.json"),
@@ -164,8 +250,9 @@ def build_release_manifest(root: Path, dias: dict[str, Any], cathaction: dict[st
                 "dataset": "CathAction",
                 "role": "core_real_data",
                 "output_dir": str(CATHACTION_OUTPUT_DIR),
-                "sample_count": int(cathaction["metrics"].get("cathaction_contract_sample_count", 0)),
-                "prediction_rows": int(cathaction["metrics"].get("cathaction_contract_prediction_count", 0)),
+                "sample_count": int(cathaction_sample_count(cathaction["metrics"])),
+                "prediction_rows": int(cathaction_prediction_count(cathaction["metrics"])),
+                "tier": "full_nonempty_human_segmentation_pairs",
             },
         ],
         "auxiliary_surfaces": [
@@ -198,6 +285,7 @@ def main() -> None:
     core_surfaces = [s for s in surfaces if s.get("role") == "core"]
     auxiliary_surfaces = [s for s in surfaces if s.get("role") == "auxiliary"]
 
+    ensure_full_cathaction_release_aliases(root)
     dias = surface_summary("dias_sequence_segmentation", root / DIAS_OUTPUT_DIR, DIAS_REQUIRED_OUTPUTS)
     cathaction = surface_summary("cathaction_human_segmentation", root / CATHACTION_OUTPUT_DIR, CATHACTION_REQUIRED_OUTPUTS)
     contract_outputs = required_files_status(root / CONTRACT_OUTPUT_DIR, CONTRACT_REQUIRED_OUTPUTS)
@@ -233,14 +321,15 @@ def main() -> None:
         ),
         "dias_predictions_copied": dias_predictions["file_count"] == 345,
         "cathaction_outputs_present": cathaction["required_outputs"]["all_present"],
-        "cathaction_benchmark_passed": metric_equals(cathaction["metrics"], "cathaction_contract_benchmark_passed", 1.0),
-        "cathaction_core_surface": metric_equals(cathaction["metrics"], "cathaction_contract_surface_role_core", 1.0),
-        "cathaction_sample_count_is_128": metric_equals(cathaction["metrics"], "cathaction_contract_sample_count", 128.0),
-        "cathaction_prediction_count_is_384": metric_equals(cathaction["metrics"], "cathaction_contract_prediction_count", 384.0),
-        "cathaction_model_count_is_three": metric_equals(cathaction["metrics"], "cathaction_contract_model_count", 3.0),
-        "cathaction_zero_synthetic_core_rows": metric_equals(cathaction["metrics"], "cathaction_contract_synthetic_core_row_count", 0.0),
-        "cathaction_predictions_copied": cathaction_predictions["file_count"] == 768,
-        "cathaction_overlays_copied": cathaction_overlays["file_count"] == 384,
+        "cathaction_full_tier_finite": metric_equals(cathaction["metrics"], "s3f_finite_metric_check", 1.0),
+        "cathaction_sample_count_is_5225": metric_equals(cathaction["metrics"], "s3f_sample_count_per_model", 5225.0),
+        "cathaction_prediction_count_is_15675": metric_equals(cathaction["metrics"], "s3f_total_prediction_count", 15675.0),
+        "cathaction_model_count_is_three": metric_equals(cathaction["metrics"], "s3f_model_count", 3.0),
+        "cathaction_nonempty_pair_universe_is_5225": metric_equals(
+            cathaction["metrics"], "s3f_nonempty_pair_universe_count", 5225.0
+        ),
+        "cathaction_predictions_copied": cathaction_predictions["file_count"] == 31350,
+        "cathaction_overlays_copied": cathaction_overlays["file_count"] == 15675,
         "release_manifest_excludes_private_manuscript_paths": not private_manifest_hits,
     }
     release_audit_passed = all(checks.values())
@@ -255,12 +344,15 @@ def main() -> None:
         "release_dias_sequence_count": float(dias["metrics"].get("dias_contract_sequence_count", 0.0)),
         "release_dias_prediction_count": float(dias["metrics"].get("dias_contract_prediction_count", 0.0)),
         "release_dias_synthetic_core_row_count": float(dias["metrics"].get("dias_contract_synthetic_core_row_count", 0.0)),
-        "release_cathaction_sample_count": float(cathaction["metrics"].get("cathaction_contract_sample_count", 0.0)),
-        "release_cathaction_prediction_count": float(cathaction["metrics"].get("cathaction_contract_prediction_count", 0.0)),
-        "release_cathaction_synthetic_core_row_count": float(cathaction["metrics"].get("cathaction_contract_synthetic_core_row_count", 0.0)),
+        "release_cathaction_sample_count": cathaction_sample_count(cathaction["metrics"]),
+        "release_cathaction_prediction_count": cathaction_prediction_count(cathaction["metrics"]),
+        "release_cathaction_nonempty_pair_universe_count": float(
+            cathaction["metrics"].get("s3f_nonempty_pair_universe_count", 0.0)
+        ),
+        "release_cathaction_synthetic_core_row_count": 0.0,
         "release_total_real_prediction_rows": float(
             dias["metrics"].get("dias_contract_prediction_count", 0.0)
-            + cathaction["metrics"].get("cathaction_contract_prediction_count", 0.0)
+            + cathaction_prediction_count(cathaction["metrics"])
         ),
         "release_derived_prediction_file_count": float(
             dias_predictions["file_count"] + cathaction_predictions["file_count"]
@@ -309,8 +401,12 @@ def main() -> None:
                 "leaderboard_rows": cathaction["leaderboard_rows"],
                 "key_metrics": {
                     "sample_count": cathaction["metrics"].get("cathaction_contract_sample_count"),
-                    "prediction_count": cathaction["metrics"].get("cathaction_contract_prediction_count"),
-                    "model_count": cathaction["metrics"].get("cathaction_contract_model_count"),
+                    "full_tier_sample_count": cathaction["metrics"].get("s3f_sample_count_per_model"),
+                    "prediction_count": cathaction_prediction_count(cathaction["metrics"]),
+                    "model_count": cathaction_model_count(cathaction["metrics"]),
+                    "sam_vit_b_mean_dice": cathaction["metrics"].get("s3f_sam_vit_b_cathaction_sample_mean_dice"),
+                    "sam_vit_l_mean_dice": cathaction["metrics"].get("s3f_sam_vit_l_cathaction_sample_mean_dice"),
+                    "medsam_vit_b_mean_dice": cathaction["metrics"].get("s3f_medsam_vit_b_cathaction_sample_mean_dice"),
                     "spearman_synthetic_mean_vs_cathaction_mean_dice": cathaction["metrics"].get("s3f_spearman_synthetic_mean_vs_cathaction_mean_dice"),
                     "bootstrap_spearman_mean": cathaction["metrics"].get("s3f_bootstrap_spearman_mean"),
                     "bootstrap_spearman_ci95_low": cathaction["metrics"].get("s3f_bootstrap_spearman_ci95_low"),

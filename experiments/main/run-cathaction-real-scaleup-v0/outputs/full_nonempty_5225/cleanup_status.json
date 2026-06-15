@@ -1,0 +1,7 @@
+{
+  "delete_requested": false,
+  "deleted": false,
+  "exists_after_cleanup": true,
+  "exists_before_cleanup": true,
+  "zip_path": "tmp/cathaction_real_scaleup/segmentation_human_train.zip"
+}

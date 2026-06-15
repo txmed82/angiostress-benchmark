@@ -1,0 +1,40 @@
+{
+  "rows": [
+    {
+      "cathaction_sample_mean_cldice": 0.40146203263266894,
+      "cathaction_sample_mean_dice": 0.3658302060565347,
+      "cathaction_sample_min_cldice": 0.0,
+      "cathaction_sample_min_dice": 0.0073782587309394985,
+      "mean_area_ratio": 11.518284893567436,
+      "model_id": "sam_vit_b",
+      "prediction_nonempty_rate": 1.0,
+      "primary_metric": "cathaction_sample_mean_dice",
+      "rank": 1,
+      "surface_id": "cathaction_human_segmentation"
+    },
+    {
+      "cathaction_sample_mean_cldice": 0.38401339271801965,
+      "cathaction_sample_mean_dice": 0.35771309274359847,
+      "cathaction_sample_min_cldice": 0.0,
+      "cathaction_sample_min_dice": 0.0,
+      "mean_area_ratio": 10.361088470530575,
+      "model_id": "sam_vit_l",
+      "prediction_nonempty_rate": 1.0,
+      "primary_metric": "cathaction_sample_mean_dice",
+      "rank": 2,
+      "surface_id": "cathaction_human_segmentation"
+    },
+    {
+      "cathaction_sample_mean_cldice": 0.10831230245995592,
+      "cathaction_sample_mean_dice": 0.11666014501214114,
+      "cathaction_sample_min_cldice": 0.0,
+      "cathaction_sample_min_dice": 0.0,
+      "mean_area_ratio": 9.195150023188951,
+      "model_id": "medsam_vit_b",
+      "prediction_nonempty_rate": 1.0,
+      "primary_metric": "cathaction_sample_mean_dice",
+      "rank": 3,
+      "surface_id": "cathaction_human_segmentation"
+    }
+  ]
+}

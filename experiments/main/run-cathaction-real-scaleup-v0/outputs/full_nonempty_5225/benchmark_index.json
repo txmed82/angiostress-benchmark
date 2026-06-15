@@ -1,0 +1,27 @@
+{
+  "benchmark_id": "angiostress-v0.1-real-data",
+  "dataset": "CathAction",
+  "empty_mask_pairs_excluded": 58,
+  "leaderboard_path": "leaderboard.json",
+  "model_count": 3,
+  "model_ids": [
+    "medsam_vit_b",
+    "sam_vit_b",
+    "sam_vit_l"
+  ],
+  "model_summary_path": "model_summary.json",
+  "nonempty_pair_universe": 5225,
+  "per_pair_metrics_path": "per_pair_metrics.json",
+  "prediction_count": 15675,
+  "primary_metric": "cathaction_sample_mean_dice",
+  "quick_subset_reference": "experiments/main/run-cathaction-contract-subset-v0/outputs",
+  "run_id": "run-cathaction-real-scaleup-v0",
+  "sample_count": 5225,
+  "samples_path": "samples.json",
+  "schema_version": 1,
+  "source_run_id": "run-cathaction-real-scaleup-v0",
+  "surface_id": "cathaction_human_segmentation",
+  "surface_role": "core",
+  "synthetic_role": "none_core_real_data",
+  "task": "prompted_device_segmentation"
+}

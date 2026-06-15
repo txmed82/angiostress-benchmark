@@ -22,7 +22,7 @@
 - role: `core`
 - dataset: `CathAction`
 - ok: `True`
-- path_checks: `4/4`
+- path_checks: `8/8`
 - json_checks: `9/9`
 - finite_metric_checks: `5/5`
 

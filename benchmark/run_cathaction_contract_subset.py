@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Materialize a contract-owned CathAction benchmark subset from audited outputs."""
+"""Materialize a contract-owned CathAction benchmark output from audited outputs."""
 
 from __future__ import annotations
 
@@ -16,6 +16,7 @@ RUN_ID = "run-cathaction-contract-subset-v0"
 CONTRACT_ID = "angiostress-v0.1-real-data"
 SURFACE_ID = "cathaction_human_segmentation"
 SOURCE_RUN_ID = "s3f-cathaction-human-segmentation-subset-ranking"
+SPLIT_NAME = "human_dataset_train_subset"
 
 
 def read_json(path: Path) -> Any:
@@ -97,7 +98,7 @@ def benchmark_pair_rows(source_rows: list[dict[str, Any]]) -> list[dict[str, Any
         copied["benchmark_run_id"] = RUN_ID
         copied["surface_id"] = SURFACE_ID
         copied["source_run_id"] = SOURCE_RUN_ID
-        copied["split"] = "human_dataset_train_subset"
+        copied["split"] = SPLIT_NAME
         copied["task"] = "prompted_vessel_segmentation"
         copied["gt_source"] = "CathAction human segmentation mask"
         copied["synthetic_role"] = "none_core_real_data"
@@ -220,9 +221,8 @@ def build_outputs(args: argparse.Namespace) -> dict[str, Any]:
             "validation_summary": "validation_summary.md",
         },
         "claim_boundary": (
-            "This is a contract-owned CathAction real-data benchmark subset built from audited frozen-model "
-            "outputs. It is a real benchmark surface for v0.1, not a final powered estimate over all CathAction "
-            "or DIAS data and not a clinical validation claim."
+            "This is a contract-owned CathAction real-data benchmark output built from audited frozen-model "
+            "outputs. It is a real benchmark surface for v0.1, not a clinical validation claim."
         ),
     }
 
@@ -247,7 +247,7 @@ def build_outputs(args: argparse.Namespace) -> dict[str, Any]:
 def write_validation_summary(path: Path, manifest: dict[str, Any], metrics: dict[str, float], leaderboard: list[dict[str, Any]]) -> None:
     checks = manifest["checks"]
     lines = [
-        "# CathAction Contract Subset Validation",
+        "# CathAction Contract Benchmark Validation",
         "",
         f"- run_id: `{RUN_ID}`",
         f"- contract_id: `{CONTRACT_ID}`",
@@ -279,7 +279,7 @@ def write_run_note(path: Path, args: argparse.Namespace, manifest: dict[str, Any
     path.write_text(
         "\n".join(
             [
-                "# CathAction Contract Subset Benchmark",
+                "# CathAction Contract Benchmark",
                 "",
                 "## Command",
                 "",
@@ -287,7 +287,7 @@ def write_run_note(path: Path, args: argparse.Namespace, manifest: dict[str, Any
                 "",
                 "## Purpose",
                 "",
-                "Materialize the audited CathAction human-segmentation subset as a contract-owned AngioStress v0.1 benchmark output.",
+                "Materialize audited CathAction human-segmentation outputs as a contract-owned AngioStress v0.1 benchmark output.",
                 "",
                 "## Boundary",
                 "",

@@ -29,6 +29,8 @@ DERIVED_DIR_MARKERS = [
     "outputs/predictions",
     "outputs/cathaction_predictions",
     "outputs/cathaction_overlays",
+    "cathaction_predictions",
+    "cathaction_overlays",
 ]
 
 
@@ -139,6 +141,7 @@ fixture only.
 
 - Real core surfaces: {int(metrics["release_real_core_surface_count"])}
 - Real prediction rows: {int(metrics["release_total_real_prediction_rows"])}
+- CathAction full-tier pairs: {int(metrics["release_cathaction_sample_count"])}
 - Derived prediction files: {int(metrics["release_derived_prediction_file_count"])}
 - Derived overlay files: {int(metrics["release_derived_overlay_file_count"])}
 - Private manifest hits: {int(metrics["release_private_manifest_hit_count"])}

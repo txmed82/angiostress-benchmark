@@ -7,7 +7,7 @@ This directory contains the runnable AngioStress v0.1 benchmark contract and val
 | Surface | Role | Output directory | Primary result files |
 |---|---|---|---|
 | DIAS sequence segmentation | core real-data surface | `experiments/main/run-dias-contract-full-test-v0/outputs/` | `manifest.json`, `per_frame_metrics.json`, `per_sequence_summary.json`, `model_summary.json`, `leaderboard.json`, `ranking_diagnostics.json` |
-| CathAction human segmentation subset | core real-data surface | `experiments/main/run-cathaction-contract-subset-v0/outputs/` | `manifest.json`, `samples.json`, `per_pair_metrics.json`, `model_summary.json`, `leaderboard.json`, `stability_summary.json` |
+| CathAction human segmentation full nonempty tier | core real-data surface | `experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/` | `manifest.json`, `samples.json`, `per_pair_metrics.json`, `model_summary.json`, `leaderboard.json`, `stability_summary.json` |
 | TopCoW-derived synthetic fixture | auxiliary surface | `experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/` | synthetic stressor/regression fixture outputs |
 
 ## Commands
@@ -29,7 +29,13 @@ python3 benchmark/run_dias_contract_full_test.py \
   --copy-artifacts
 ```
 
-Materialize the CathAction benchmark-owned output from the audited CathAction subset:
+Materialize the full CathAction benchmark-owned output from the audited full nonempty tier:
+
+```bash
+python3 benchmark/run_cathaction_full_tier.py
+```
+
+Materialize the older quick CathAction subset output, useful only as a smoke-scale compatibility check:
 
 ```bash
 python3 benchmark/run_cathaction_contract_subset.py \

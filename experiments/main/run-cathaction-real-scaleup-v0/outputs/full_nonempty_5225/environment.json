@@ -1,0 +1,6 @@
+{
+  "device": "mps",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "python": "3.11.15",
+  "torch": "2.12.0"
+}

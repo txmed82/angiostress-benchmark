@@ -6,7 +6,7 @@
   "claim_boundary": "This contract defines a real-data-first benchmark surface and validates source/result availability. It is not a final construct-validity estimate, clinical validation, or model-improvement claim.",
   "contract_id": "angiostress-v0.1-real-data",
   "contract_path": "benchmark/contracts/angiostress_v0_1_real_data.json",
-  "created_at": "2026-06-15T16:03:37.900481+00:00",
+  "created_at": "2026-06-15T19:52:15.074029+00:00",
   "environment": {
     "platform": "macOS-26.5.1-arm64-arm-64bit",
     "python": "3.9.6"
@@ -138,99 +138,99 @@
       "dataset": "CathAction",
       "finite_metric_checks": [
         {
-          "actual": 128.0,
+          "actual": 5225.0,
           "key": "s3f_sample_count_per_model",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json"
         },
         {
-          "actual": 384.0,
+          "actual": 15675.0,
           "key": "s3f_total_prediction_count",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json"
         },
         {
           "actual": 3.0,
           "key": "s3f_model_count",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json"
         },
         {
           "actual": 5225.0,
           "key": "s3f_nonempty_pair_universe_count",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json"
         },
         {
           "actual": 1.0,
           "key": "s3f_finite_metric_check",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json"
         }
       ],
       "json_checks": [
         {
-          "actual": 128,
-          "expected": 128,
+          "actual": 5225,
+          "expected": 5225,
           "key": "sample_count",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/manifest.json"
         },
         {
           "actual": 5283,
           "expected": 5283,
           "key": "pair_universe.total_image_mask_pairs",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/manifest.json"
         },
         {
           "actual": 58,
           "expected": 58,
           "key": "pair_universe.empty_mask_pairs_excluded",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/manifest.json"
         },
         {
           "actual": 5225,
           "expected": 5225,
           "key": "pair_universe.nonempty_mask_pairs",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/manifest.json"
         },
         {
           "actual": "gs://seldinger-datasets-raw/angiostress/cathaction/hf/segmentation_human_train.zip",
           "expected": "gs://seldinger-datasets-raw/angiostress/cathaction/hf/segmentation_human_train.zip",
           "key": "gcp_source",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/manifest.json"
         },
         {
-          "actual": 128.0,
-          "expected": 128.0,
+          "actual": 5225.0,
+          "expected": 5225.0,
           "key": "s3f_sample_count_per_model",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json"
         },
         {
           "actual": 3.0,
           "expected": 3.0,
           "key": "s3f_model_count",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json"
         },
         {
-          "actual": 384.0,
-          "expected": 384.0,
+          "actual": 15675.0,
+          "expected": 15675.0,
           "key": "s3f_total_prediction_count",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json"
         },
         {
           "actual": 5225.0,
           "expected": 5225.0,
           "key": "s3f_nonempty_pair_universe_count",
           "ok": true,
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json"
         }
       ],
       "ok": true,
@@ -250,6 +250,22 @@
         {
           "exists": true,
           "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/per_pair_metrics.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/manifest.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/model_summary.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/per_pair_metrics.json"
         }
       ],
       "role": "core",

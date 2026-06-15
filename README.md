@@ -5,7 +5,7 @@ AngioStress is a deterministic benchmark package for stress-testing frozen endov
 The benchmark core is real data:
 
 - DIAS sequence segmentation: 20 labeled test sequences, 115 evaluated frames per model, 345 prediction rows across three frozen models.
-- CathAction human segmentation subset: 128 deterministic nonempty image-mask pairs, 384 prediction rows across three frozen models.
+- CathAction human segmentation: 5,225 audited nonempty image-mask pairs, 15,675 prediction rows across three frozen models.
 
 The TopCoW-derived synthetic projection fixture is auxiliary. It is used for controlled stressor and regression checks, not as the core benchmark surface.
 
@@ -22,11 +22,12 @@ All model entries are treated as frozen, off-the-shelf evaluation targets. This 
 - Contract: `benchmark/contracts/angiostress_v0_1_real_data.json`
 - Contract validator: `benchmark/validate_contract.py`
 - DIAS benchmark runner: `benchmark/run_dias_contract_full_test.py`
-- CathAction benchmark runner: `benchmark/run_cathaction_contract_subset.py`
+- CathAction full-tier benchmark runner: `benchmark/run_cathaction_full_tier.py`
+- CathAction quick subset materializer: `benchmark/run_cathaction_contract_subset.py`
 - Release audit: `benchmark/run_release_audit.py`
 - Public release staging/audit: `benchmark/stage_public_release.py`
 - DIAS outputs: `experiments/main/run-dias-contract-full-test-v0/outputs/`
-- CathAction outputs: `experiments/main/run-cathaction-contract-subset-v0/outputs/`
+- CathAction full-tier outputs: `experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/`
 
 ## Public Artifacts
 
@@ -62,4 +63,4 @@ DIAS and CathAction source datasets should be obtained from their original sourc
 
 ## Claim Boundary
 
-AngioStress v0.1 is a benchmark artifact and measurement package. The current DIAS rank-transfer diagnostic is discordant, and the CathAction subset shows partial rank agreement. These results should be reported as benchmark measurements, not as clinical validation, model improvement, or proof of positive synthetic-to-real transfer.
+AngioStress v0.1 is a benchmark artifact and measurement package. The public package exposes real DIAS and CathAction evaluation surfaces, frozen-model metrics, manifests, and derived prediction artifacts. It should not be presented as clinical validation, model improvement, or proof of synthetic-to-real transfer.

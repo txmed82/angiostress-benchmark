@@ -1,0 +1,18 @@
+{
+  "comparison": {
+    "cathaction_sample_mean_dice_order": [
+      "sam_vit_b",
+      "sam_vit_l",
+      "medsam_vit_b"
+    ],
+    "claim_boundary": "This is a bounded CathAction human-segmentation subset check. It tests whether the frozen-panel ordering is stable enough to justify paper-outline repair, but it is not the final DIAS + CathAction construct-validity estimate across all stressors.",
+    "rank_correlation_status": "subset_rank_diagnostic_bootstrap_stability_no_final_ci_n3",
+    "ranked_model_count": 3,
+    "spearman_synthetic_mean_stressor_dice_vs_cathaction_mean_dice": 0.5,
+    "synthetic_mean_stressor_dice_order": [
+      "sam_vit_l",
+      "sam_vit_b",
+      "medsam_vit_b"
+    ]
+  }
+}

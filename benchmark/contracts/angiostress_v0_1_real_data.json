@@ -93,13 +93,13 @@
       "task": "catheter and guidewire human segmentation masks",
       "source_paper": "arXiv:2408.13126",
       "source_paths": [
-        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json",
-        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json",
-        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/model_summary.json",
-        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/per_pair_metrics.json"
+        "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/manifest.json",
+        "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json",
+        "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/model_summary.json",
+        "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/per_pair_metrics.json"
       ],
       "storage_source": "gs://seldinger-datasets-raw/angiostress/cathaction/hf/segmentation_human_train.zip",
-      "split_rule": "Use deterministic evenly spaced sampling over the nonempty image-mask-pair universe for v0.1 subset validation; scale only after the contract runner passes.",
+      "split_rule": "Use the full audited nonempty image-mask-pair universe for the v0.1 CathAction tier: 5,225 nonempty pairs after excluding 58 empty-mask pairs from 5,283 paired records.",
       "prior_pilot_outputs": [
         "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json",
         "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json",
@@ -108,9 +108,9 @@
       ],
       "validation_checks": [
         {
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json",
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/manifest.json",
           "json_equals": {
-            "sample_count": 128,
+            "sample_count": 5225,
             "pair_universe.total_image_mask_pairs": 5283,
             "pair_universe.empty_mask_pairs_excluded": 58,
             "pair_universe.nonempty_mask_pairs": 5225,
@@ -118,7 +118,7 @@
           }
         },
         {
-          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json",
+          "path": "experiments/main/run-cathaction-real-scaleup-v0/outputs/full_nonempty_5225/metrics_summary.json",
           "finite_metrics": [
             "s3f_sample_count_per_model",
             "s3f_total_prediction_count",
@@ -127,9 +127,9 @@
             "s3f_finite_metric_check"
           ],
           "json_equals": {
-            "s3f_sample_count_per_model": 128.0,
+            "s3f_sample_count_per_model": 5225.0,
             "s3f_model_count": 3.0,
-            "s3f_total_prediction_count": 384.0,
+            "s3f_total_prediction_count": 15675.0,
             "s3f_nonempty_pair_universe_count": 5225.0
           }
         }
