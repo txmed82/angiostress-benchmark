@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
+import tarfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -32,6 +34,11 @@ DERIVED_DIR_MARKERS = [
     "cathaction_predictions",
     "cathaction_overlays",
 ]
+
+ARCHIVE_NAMES = {
+    "cathaction_predictions": "cathaction_full_nonempty_5225_predictions.tar",
+    "cathaction_overlays": "cathaction_full_nonempty_5225_overlays.tar",
+}
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -78,6 +85,41 @@ def copy_path(root: Path, rel_path: str, destination_root: Path) -> dict[str, An
     return {"path": rel_path, "copied": True, "kind": "dir" if src.is_dir() else "file"}
 
 
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def archive_name_for(rel_path: str) -> str:
+    name = Path(rel_path).name
+    return ARCHIVE_NAMES.get(name, rel_path.replace("/", "__") + ".tar")
+
+
+def archive_derived_dir(root: Path, rel_path: str, destination_root: Path) -> dict[str, Any]:
+    src = root / rel_path
+    archive_dir = destination_root / "archives"
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    archive_path = archive_dir / archive_name_for(rel_path)
+
+    files = [p for p in src.rglob("*") if p.is_file()]
+    with tarfile.open(archive_path, "w") as tar:
+        tar.add(src, arcname=rel_path)
+
+    return {
+        "path": rel_path,
+        "copied": True,
+        "kind": "archive",
+        "archive_path": str(archive_path.relative_to(destination_root)),
+        "source_file_count": len(files),
+        "source_size_bytes": sum(p.stat().st_size for p in files),
+        "archive_size_bytes": archive_path.stat().st_size,
+        "archive_sha256": sha256_file(archive_path),
+    }
+
+
 def file_inventory(root: Path) -> dict[str, Any]:
     files = [p for p in root.rglob("*") if p.is_file()]
     rel_paths = sorted(str(p.relative_to(root)) for p in files)
@@ -98,15 +140,44 @@ contracts, manifests, metrics, and validation outputs.
 - GitHub code repository: https://github.com/{github_repo}
 - Hugging Face dataset artifact: https://huggingface.co/datasets/{hf_dataset}
 
-The Hugging Face dataset contains the larger derived prediction and overlay
-artifacts staged from the release manifest. Raw DIAS and CathAction source data
-remain governed by their original sources and are not redistributed here.
+The Hugging Face dataset contains browseable metadata and archive payloads for
+the larger derived prediction and overlay artifacts staged from the release
+manifest. Raw DIAS and CathAction source data remain governed by their original
+sources and are not redistributed here.
 """
     (path / "PUBLIC_ARTIFACTS.md").write_text(text)
 
 
-def write_hf_dataset_card(path: Path, github_repo: str, hf_dataset: str, manifest: dict[str, Any]) -> None:
+def write_archive_manifest(path: Path, archive_entries: list[dict[str, Any]], manifest: dict[str, Any]) -> None:
+    write_json(
+        path / "archives" / "derived_artifact_manifest.json",
+        {
+            "schema_version": 1,
+            "format": "uncompressed_tar_archives",
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "release_id": manifest.get("release_id"),
+            "raw_data_boundary": manifest.get("raw_data_boundary"),
+            "extraction": (
+                "Extract each archive at the repository root to restore the "
+                "source-relative derived benchmark output directories."
+            ),
+            "archives": archive_entries,
+        },
+    )
+
+
+def write_hf_dataset_card(
+    path: Path,
+    github_repo: str,
+    hf_dataset: str,
+    manifest: dict[str, Any],
+    archive_entries: list[dict[str, Any]],
+) -> None:
     metrics = read_json(DEFAULT_RELEASE_DIR / "metrics_summary.json")
+    archive_lines = "\n".join(
+        f"- `{entry['archive_path']}`: {entry['source_file_count']} files, sha256 `{entry['archive_sha256']}`"
+        for entry in archive_entries
+    )
     text = f"""---
 pretty_name: AngioStress v0.1 Real-Data Benchmark Artifacts
 tags:
@@ -145,6 +216,14 @@ fixture only.
 - Derived prediction files: {int(metrics["release_derived_prediction_file_count"])}
 - Derived overlay files: {int(metrics["release_derived_overlay_file_count"])}
 - Private manifest hits: {int(metrics["release_private_manifest_hit_count"])}
+
+## Large Derived Artifacts
+
+Large prediction and overlay directories are stored as tar archives so the
+benchmark remains practical to download from the Hub without expanding tens of
+thousands of small files in the repository tree.
+
+{archive_lines}
 """
     (path / "README.md").write_text(text)
 
@@ -174,6 +253,7 @@ def main() -> None:
     missing = []
     github_copies = []
     hf_copies = []
+    hf_archives = []
     for rel_path in public_files:
         if not safe_public_path(rel_path):
             continue
@@ -181,12 +261,18 @@ def main() -> None:
         if not src.exists():
             missing.append(rel_path)
             continue
-        hf_copies.append(copy_path(root, rel_path, hf_stage))
+        if is_derived_dir(rel_path) and src.is_dir():
+            archive_entry = archive_derived_dir(root, rel_path, hf_stage)
+            hf_copies.append(archive_entry)
+            hf_archives.append(archive_entry)
+        else:
+            hf_copies.append(copy_path(root, rel_path, hf_stage))
         if github_public_file(rel_path):
             github_copies.append(copy_path(root, rel_path, github_stage))
 
     write_github_artifact_note(github_stage, args.github_repo, args.hf_dataset)
-    write_hf_dataset_card(hf_stage, args.github_repo, args.hf_dataset, manifest)
+    write_archive_manifest(hf_stage, hf_archives, manifest)
+    write_hf_dataset_card(hf_stage, args.github_repo, args.hf_dataset, manifest, hf_archives)
 
     github_inventory = file_inventory(github_stage)
     hf_inventory = file_inventory(hf_stage)
@@ -197,7 +283,11 @@ def main() -> None:
         "github_private_hits_zero": not github_inventory["private_hits"],
         "hf_private_hits_zero": not hf_inventory["private_hits"],
         "github_excludes_large_derived_dirs": not any(is_derived_dir(p) for p in github_inventory["paths"]),
-        "hf_includes_derived_prediction_artifacts": any(is_derived_dir(p) for p in hf_inventory["paths"]),
+        "hf_archives_large_derived_dirs": len(hf_archives) >= 3
+        and all(entry["archive_size_bytes"] > 0 for entry in hf_archives)
+        and any(entry["path"].endswith("/cathaction_predictions") for entry in hf_archives)
+        and any(entry["path"].endswith("/cathaction_overlays") for entry in hf_archives),
+        "hf_does_not_expand_large_derived_dirs": not any(is_derived_dir(p) for p in hf_inventory["paths"]),
     }
     passed = all(checks.values())
 
@@ -216,6 +306,7 @@ def main() -> None:
         "passed": passed,
         "github_inventory": github_inventory,
         "hf_inventory": hf_inventory,
+        "hf_archive_entries": hf_archives,
         "github_copied_entries": github_copies,
         "hf_copied_entries": hf_copies,
         "release_boundary": {
