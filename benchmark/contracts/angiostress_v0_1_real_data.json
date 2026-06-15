@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "angiostress-v0.1-real-data",
+  "title": "AngioStress v0.1 Real-Data-First Benchmark Contract",
+  "created_at": "2026-06-15",
+  "active_idea_id": "idea-2a9c7016",
+  "route_decision": "decision-b0c6402c",
+  "claim_boundary": "This contract defines a real-data-first benchmark surface and validates source/result availability. It is not a final construct-validity estimate, clinical validation, or model-improvement claim.",
+  "benchmark_role": {
+    "core": "DIAS and CathAction real angiography/endovascular segmentation surfaces are the benchmark core.",
+    "auxiliary": "TopCoW-derived synthetic projections and stressors are auxiliary controlled fixtures for stressor tests and regression checks."
+  },
+  "frozen_model_panel": [
+    {
+      "model_id": "sam_vit_b",
+      "display_name": "SAM ViT-B",
+      "training_policy": "frozen_off_the_shelf"
+    },
+    {
+      "model_id": "sam_vit_l",
+      "display_name": "SAM ViT-L",
+      "training_policy": "frozen_off_the_shelf"
+    },
+    {
+      "model_id": "medsam_vit_b",
+      "display_name": "MedSAM ViT-B",
+      "training_policy": "frozen_off_the_shelf"
+    }
+  ],
+  "metric_schema": {
+    "required_metrics": [
+      "dice",
+      "cldice",
+      "finite_metric_check"
+    ],
+    "topology_ready_metrics": [
+      "cldice",
+      "betti_matching_error_optional"
+    ],
+    "primary_validation_metric": "contract_validation_passed"
+  },
+  "surfaces": [
+    {
+      "surface_id": "dias_sequence_segmentation",
+      "role": "core",
+      "dataset": "DIAS",
+      "task": "intracranial artery segmentation in DSA sequences",
+      "source_paper": "arXiv:2306.12153",
+      "source_paths": [
+        "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/source_availability_audit.json",
+        "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/dias_sequence_inventory.json",
+        "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/outputs/real_dsa_loader_manifest.json"
+      ],
+      "split_rule": "Use the published DIAS split inventory; test sequences are s40-s59 in the audited local manifest.",
+      "label_schema_boundary": "DIAS labels are sequence-level masks in the current audit. Frame-level evaluation must use an explicit selected-frame or sequence-level protocol rather than pretending independent per-frame labels exist.",
+      "prior_pilot_outputs": [
+        "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/manifest.json",
+        "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json",
+        "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/model_summary.json",
+        "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/per_frame_metrics.json"
+      ],
+      "validation_checks": [
+        {
+          "path": "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/dias_sequence_inventory.json",
+          "json_equals": {
+            "sequence_count": 60,
+            "split_counts.test": 20,
+            "split_counts.training": 30,
+            "split_counts.validation": 10
+          }
+        },
+        {
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json",
+          "finite_metrics": [
+            "s3b_sequence_count",
+            "s3b_frame_count_per_model",
+            "s3b_total_prediction_count",
+            "s3b_model_count",
+            "s3b_finite_metric_check"
+          ],
+          "json_equals": {
+            "s3b_sequence_count": 20.0,
+            "s3b_model_count": 3.0,
+            "s3b_total_prediction_count": 345.0
+          }
+        }
+      ]
+    },
+    {
+      "surface_id": "cathaction_human_segmentation",
+      "role": "core",
+      "dataset": "CathAction",
+      "task": "catheter and guidewire human segmentation masks",
+      "source_paper": "arXiv:2408.13126",
+      "source_paths": [
+        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json",
+        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json",
+        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/model_summary.json",
+        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/per_pair_metrics.json"
+      ],
+      "storage_source": "gs://seldinger-datasets-raw/angiostress/cathaction/hf/segmentation_human_train.zip",
+      "split_rule": "Use deterministic evenly spaced sampling over the nonempty image-mask-pair universe for v0.1 subset validation; scale only after the contract runner passes.",
+      "prior_pilot_outputs": [
+        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json",
+        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json",
+        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/model_summary.json",
+        "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/per_pair_metrics.json"
+      ],
+      "validation_checks": [
+        {
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json",
+          "json_equals": {
+            "sample_count": 128,
+            "pair_universe.total_image_mask_pairs": 5283,
+            "pair_universe.empty_mask_pairs_excluded": 58,
+            "pair_universe.nonempty_mask_pairs": 5225,
+            "gcp_source": "gs://seldinger-datasets-raw/angiostress/cathaction/hf/segmentation_human_train.zip"
+          }
+        },
+        {
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json",
+          "finite_metrics": [
+            "s3f_sample_count_per_model",
+            "s3f_total_prediction_count",
+            "s3f_model_count",
+            "s3f_nonempty_pair_universe_count",
+            "s3f_finite_metric_check"
+          ],
+          "json_equals": {
+            "s3f_sample_count_per_model": 128.0,
+            "s3f_model_count": 3.0,
+            "s3f_total_prediction_count": 384.0,
+            "s3f_nonempty_pair_universe_count": 5225.0
+          }
+        }
+      ]
+    },
+    {
+      "surface_id": "topcow_synthetic_stressor_fixture",
+      "role": "auxiliary",
+      "dataset": "TopCoW-derived synthetic projection",
+      "task": "controlled DSA-like stressor fixture",
+      "source_paper": "arXiv:2312.17670",
+      "source_paths": [
+        "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/metrics_summary.json",
+        "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/model_summary.json",
+        "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/synthetic_per_cell_metrics.json"
+      ],
+      "role_boundary": "Auxiliary stressor and regression fixture only; not the core benchmark surface.",
+      "validation_checks": [
+        {
+          "path": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/metrics_summary.json",
+          "finite_metrics": [
+            "s2c_model_count",
+            "s2c_ranked_model_count",
+            "s2c_finite_metric_check",
+            "s2c_synthetic_item_count_per_model"
+          ],
+          "json_equals": {
+            "s2c_model_count": 3.0,
+            "s2c_ranked_model_count": 3.0,
+            "s2c_synthetic_item_count_per_model": 10.0
+          }
+        }
+      ]
+    }
+  ],
+  "validation_output": {
+    "run_id": "run-real-data-first-benchmark-contract",
+    "output_dir": "experiments/main/run-real-data-first-benchmark-contract/outputs",
+    "required_files": [
+      "contract_validation_report.json",
+      "metrics_summary.json",
+      "validation_summary.md"
+    ]
+  }
+}

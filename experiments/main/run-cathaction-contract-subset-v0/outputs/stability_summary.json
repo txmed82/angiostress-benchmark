@@ -1,0 +1,23 @@
+{
+  "bootstrap_iterations": 1000,
+  "bootstrap_order_match_full_rate": 0.943,
+  "bootstrap_order_match_synthetic_rate": 0.057,
+  "bootstrap_seed": 20260615,
+  "bootstrap_spearman_ci95_percentile": [
+    0.5,
+    1.0
+  ],
+  "bootstrap_spearman_mean": 0.5285,
+  "boundary": "Bootstrap resamples the fixed CathAction subset only; it is a sample-stability diagnostic, not a population-level final CI.",
+  "full_cathaction_order": [
+    "sam_vit_b",
+    "sam_vit_l",
+    "medsam_vit_b"
+  ],
+  "sampled_pair_count": 128,
+  "synthetic_order": [
+    "sam_vit_l",
+    "sam_vit_b",
+    "medsam_vit_b"
+  ]
+}

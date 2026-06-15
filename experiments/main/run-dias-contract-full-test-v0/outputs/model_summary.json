@@ -1,0 +1,52 @@
+{
+  "rows": [
+    {
+      "dias_multisequence_mean_cldice": 0.27170020266718053,
+      "dias_multisequence_mean_dice": 0.2953272961315869,
+      "dias_multisequence_mean_sam_score": 0.6106105270593063,
+      "dias_multisequence_median_dice": 0.28128469030504866,
+      "display_name": "MedSAM ViT-B",
+      "evaluated_frame_count": 115,
+      "evaluated_sequence_count": 20,
+      "model_id": "medsam_vit_b",
+      "s2c_dias_s40_all_frame_mean_dice": 0.21390124855402506,
+      "s2c_synthetic_clean_dice": 0.25539705183071804,
+      "s2c_synthetic_mean_stressor_dice": 0.2683099580428599,
+      "sequence_mean_dice_max": 0.47887878770467673,
+      "sequence_mean_dice_mean": 0.2970833911622957,
+      "sequence_mean_dice_min": 0.1666473464939386
+    },
+    {
+      "dias_multisequence_mean_cldice": 0.23905034203974435,
+      "dias_multisequence_mean_dice": 0.24047126061117688,
+      "dias_multisequence_mean_sam_score": 0.9787089835042538,
+      "dias_multisequence_median_dice": 0.2173303269590991,
+      "display_name": "SAM ViT-B",
+      "evaluated_frame_count": 115,
+      "evaluated_sequence_count": 20,
+      "model_id": "sam_vit_b",
+      "s2c_dias_s40_all_frame_mean_dice": 0.21131857528530187,
+      "s2c_synthetic_clean_dice": 0.9810482128526452,
+      "s2c_synthetic_mean_stressor_dice": 0.892633475863582,
+      "sequence_mean_dice_max": 0.4424582011424582,
+      "sequence_mean_dice_mean": 0.23740919750852868,
+      "sequence_mean_dice_min": 0.16889568452538883
+    },
+    {
+      "dias_multisequence_mean_cldice": 0.26908858866695956,
+      "dias_multisequence_mean_dice": 0.2628457985032004,
+      "dias_multisequence_mean_sam_score": 0.9741075945937115,
+      "dias_multisequence_median_dice": 0.23044118283759796,
+      "display_name": "SAM ViT-L",
+      "evaluated_frame_count": 115,
+      "evaluated_sequence_count": 20,
+      "model_id": "sam_vit_l",
+      "s2c_dias_s40_all_frame_mean_dice": 0.1791642796798271,
+      "s2c_synthetic_clean_dice": 0.9751922599851154,
+      "s2c_synthetic_mean_stressor_dice": 0.9621867353873088,
+      "sequence_mean_dice_max": 0.49079609836400173,
+      "sequence_mean_dice_mean": 0.2645383358878646,
+      "sequence_mean_dice_min": 0.1394958030075124
+    }
+  ]
+}

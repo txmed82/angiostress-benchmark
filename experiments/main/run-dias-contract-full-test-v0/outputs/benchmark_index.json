@@ -1,0 +1,25 @@
+{
+  "benchmark_id": "angiostress-v0.1-real-data",
+  "claim_boundary": "Contract-owned DIAS real-data full-test benchmark surface; preserves discordant rank-transfer evidence.",
+  "frame_count_per_model": 115,
+  "model_count": 3,
+  "prediction_count": 345,
+  "primary_outputs": [
+    "manifest.json",
+    "sequences.json",
+    "per_frame_metrics.json",
+    "per_sequence_summary.json",
+    "model_summary.json",
+    "leaderboard.json",
+    "ranking_diagnostics.json",
+    "metrics_summary.json",
+    "validation_summary.md"
+  ],
+  "run_id": "run-dias-contract-full-test-v0",
+  "sequence_count": 20,
+  "source_dir": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs",
+  "source_run_id": "s3b-dias-full-test-split-ranking",
+  "surface_id": "dias_sequence_segmentation",
+  "surface_role": "core",
+  "validation_passed": true
+}

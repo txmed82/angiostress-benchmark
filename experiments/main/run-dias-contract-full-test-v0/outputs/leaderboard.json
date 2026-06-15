@@ -1,0 +1,43 @@
+{
+  "rows": [
+    {
+      "dias_multisequence_mean_cldice": 0.27170020266718053,
+      "dias_multisequence_mean_dice": 0.2953272961315869,
+      "dias_multisequence_median_dice": 0.28128469030504866,
+      "evaluated_frame_count": 115,
+      "evaluated_sequence_count": 20,
+      "model_id": "medsam_vit_b",
+      "primary_metric": "dias_multisequence_mean_dice",
+      "rank": 1,
+      "sequence_mean_dice_max": 0.47887878770467673,
+      "sequence_mean_dice_min": 0.1666473464939386,
+      "surface_id": "dias_sequence_segmentation"
+    },
+    {
+      "dias_multisequence_mean_cldice": 0.26908858866695956,
+      "dias_multisequence_mean_dice": 0.2628457985032004,
+      "dias_multisequence_median_dice": 0.23044118283759796,
+      "evaluated_frame_count": 115,
+      "evaluated_sequence_count": 20,
+      "model_id": "sam_vit_l",
+      "primary_metric": "dias_multisequence_mean_dice",
+      "rank": 2,
+      "sequence_mean_dice_max": 0.49079609836400173,
+      "sequence_mean_dice_min": 0.1394958030075124,
+      "surface_id": "dias_sequence_segmentation"
+    },
+    {
+      "dias_multisequence_mean_cldice": 0.23905034203974435,
+      "dias_multisequence_mean_dice": 0.24047126061117688,
+      "dias_multisequence_median_dice": 0.2173303269590991,
+      "evaluated_frame_count": 115,
+      "evaluated_sequence_count": 20,
+      "model_id": "sam_vit_b",
+      "primary_metric": "dias_multisequence_mean_dice",
+      "rank": 3,
+      "sequence_mean_dice_max": 0.4424582011424582,
+      "sequence_mean_dice_min": 0.16889568452538883,
+      "surface_id": "dias_sequence_segmentation"
+    }
+  ]
+}

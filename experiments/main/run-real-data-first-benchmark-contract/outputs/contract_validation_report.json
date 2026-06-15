@@ -1,0 +1,328 @@
+{
+  "benchmark_role": {
+    "auxiliary": "TopCoW-derived synthetic projections and stressors are auxiliary controlled fixtures for stressor tests and regression checks.",
+    "core": "DIAS and CathAction real angiography/endovascular segmentation surfaces are the benchmark core."
+  },
+  "claim_boundary": "This contract defines a real-data-first benchmark surface and validates source/result availability. It is not a final construct-validity estimate, clinical validation, or model-improvement claim.",
+  "contract_id": "angiostress-v0.1-real-data",
+  "contract_path": "benchmark/contracts/angiostress_v0_1_real_data.json",
+  "created_at": "2026-06-15T16:03:37.900481+00:00",
+  "environment": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.9.6"
+  },
+  "ok": true,
+  "run_id": "run-real-data-first-benchmark-contract",
+  "schema_version": 1,
+  "surface_results": [
+    {
+      "dataset": "DIAS",
+      "finite_metric_checks": [
+        {
+          "actual": 20.0,
+          "key": "s3b_sequence_count",
+          "ok": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 115.0,
+          "key": "s3b_frame_count_per_model",
+          "ok": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 345.0,
+          "key": "s3b_total_prediction_count",
+          "ok": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 3.0,
+          "key": "s3b_model_count",
+          "ok": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 1.0,
+          "key": "s3b_finite_metric_check",
+          "ok": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json"
+        }
+      ],
+      "json_checks": [
+        {
+          "actual": 60,
+          "expected": 60,
+          "key": "sequence_count",
+          "ok": true,
+          "path": "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/dias_sequence_inventory.json"
+        },
+        {
+          "actual": 20,
+          "expected": 20,
+          "key": "split_counts.test",
+          "ok": true,
+          "path": "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/dias_sequence_inventory.json"
+        },
+        {
+          "actual": 30,
+          "expected": 30,
+          "key": "split_counts.training",
+          "ok": true,
+          "path": "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/dias_sequence_inventory.json"
+        },
+        {
+          "actual": 10,
+          "expected": 10,
+          "key": "split_counts.validation",
+          "ok": true,
+          "path": "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/dias_sequence_inventory.json"
+        },
+        {
+          "actual": 20.0,
+          "expected": 20.0,
+          "key": "s3b_sequence_count",
+          "ok": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 3.0,
+          "expected": 3.0,
+          "key": "s3b_model_count",
+          "ok": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 345.0,
+          "expected": 345.0,
+          "key": "s3b_total_prediction_count",
+          "ok": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json"
+        }
+      ],
+      "ok": true,
+      "path_checks": [
+        {
+          "exists": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/manifest.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/model_summary.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/per_frame_metrics.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/dias_sequence_inventory.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/outputs/real_dsa_loader_manifest.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/source_availability_audit.json"
+        }
+      ],
+      "role": "core",
+      "surface_id": "dias_sequence_segmentation"
+    },
+    {
+      "dataset": "CathAction",
+      "finite_metric_checks": [
+        {
+          "actual": 128.0,
+          "key": "s3f_sample_count_per_model",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 384.0,
+          "key": "s3f_total_prediction_count",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 3.0,
+          "key": "s3f_model_count",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 5225.0,
+          "key": "s3f_nonempty_pair_universe_count",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 1.0,
+          "key": "s3f_finite_metric_check",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+        }
+      ],
+      "json_checks": [
+        {
+          "actual": 128,
+          "expected": 128,
+          "key": "sample_count",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json"
+        },
+        {
+          "actual": 5283,
+          "expected": 5283,
+          "key": "pair_universe.total_image_mask_pairs",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json"
+        },
+        {
+          "actual": 58,
+          "expected": 58,
+          "key": "pair_universe.empty_mask_pairs_excluded",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json"
+        },
+        {
+          "actual": 5225,
+          "expected": 5225,
+          "key": "pair_universe.nonempty_mask_pairs",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json"
+        },
+        {
+          "actual": "gs://seldinger-datasets-raw/angiostress/cathaction/hf/segmentation_human_train.zip",
+          "expected": "gs://seldinger-datasets-raw/angiostress/cathaction/hf/segmentation_human_train.zip",
+          "key": "gcp_source",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json"
+        },
+        {
+          "actual": 128.0,
+          "expected": 128.0,
+          "key": "s3f_sample_count_per_model",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 3.0,
+          "expected": 3.0,
+          "key": "s3f_model_count",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 384.0,
+          "expected": 384.0,
+          "key": "s3f_total_prediction_count",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 5225.0,
+          "expected": 5225.0,
+          "key": "s3f_nonempty_pair_universe_count",
+          "ok": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+        }
+      ],
+      "ok": true,
+      "path_checks": [
+        {
+          "exists": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/manifest.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/metrics_summary.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/model_summary.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/analysis/s3f-cathaction-human-segmentation-subset-ranking/outputs/per_pair_metrics.json"
+        }
+      ],
+      "role": "core",
+      "surface_id": "cathaction_human_segmentation"
+    },
+    {
+      "dataset": "TopCoW-derived synthetic projection",
+      "finite_metric_checks": [
+        {
+          "actual": 3.0,
+          "key": "s2c_model_count",
+          "ok": true,
+          "path": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 3.0,
+          "key": "s2c_ranked_model_count",
+          "ok": true,
+          "path": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 1.0,
+          "key": "s2c_finite_metric_check",
+          "ok": true,
+          "path": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 10.0,
+          "key": "s2c_synthetic_item_count_per_model",
+          "ok": true,
+          "path": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/metrics_summary.json"
+        }
+      ],
+      "json_checks": [
+        {
+          "actual": 3.0,
+          "expected": 3.0,
+          "key": "s2c_model_count",
+          "ok": true,
+          "path": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 3.0,
+          "expected": 3.0,
+          "key": "s2c_ranked_model_count",
+          "ok": true,
+          "path": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/metrics_summary.json"
+        },
+        {
+          "actual": 10.0,
+          "expected": 10.0,
+          "key": "s2c_synthetic_item_count_per_model",
+          "ok": true,
+          "path": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/metrics_summary.json"
+        }
+      ],
+      "ok": true,
+      "path_checks": [
+        {
+          "exists": true,
+          "path": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/metrics_summary.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/model_summary.json"
+        },
+        {
+          "exists": true,
+          "path": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/synthetic_per_cell_metrics.json"
+        }
+      ],
+      "role": "auxiliary",
+      "surface_id": "topcow_synthetic_stressor_fixture"
+    }
+  ]
+}

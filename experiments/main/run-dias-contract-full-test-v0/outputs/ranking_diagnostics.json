@@ -1,0 +1,337 @@
+{
+  "aggregate_kendall_s2c_synthetic_vs_dias_multisequence_mean_dice": -0.3333333333333333,
+  "aggregate_spearman_s2c_synthetic_vs_dias_multisequence_mean_dice": -0.5,
+  "claim_boundary": "S3a expands DIAS coverage but remains a diagnostic construct-validity precursor: one synthetic TopCoW case, oracle label-box prompting, sequence-level DIAS masks, three frozen promptable models, and no CathAction/device-action analog.",
+  "dias_multisequence_mean_dice_order": [
+    "medsam_vit_b",
+    "sam_vit_l",
+    "sam_vit_b"
+  ],
+  "model_ids": [
+    "medsam_vit_b",
+    "sam_vit_b",
+    "sam_vit_l"
+  ],
+  "rank_correlation_status": "diagnostic_only_n3_models_sequence_bootstrap_one_synthetic_case_no_cathaction",
+  "ranked_model_count": 3,
+  "s2c_synthetic_mean_stressor_dice_order": [
+    "sam_vit_l",
+    "sam_vit_b",
+    "medsam_vit_b"
+  ],
+  "sequence_kendall_bootstrap": {
+    "ci95_high": -0.13333333333333333,
+    "ci95_low": -0.6666666666666666,
+    "draws": 2000,
+    "mean": -0.4
+  },
+  "sequence_rank_diagnostics": [
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -1.0,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_b",
+        "sam_vit_l"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.21390124855402506,
+        "sam_vit_b": 0.21131857528530187,
+        "sam_vit_l": 0.1791642796798271
+      },
+      "sequence_id": "s40",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -1.0
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": 0.3333333333333333,
+      "model_order_by_mean_dice": [
+        "sam_vit_l",
+        "medsam_vit_b",
+        "sam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.2642545887915801,
+        "sam_vit_b": 0.18022218710608856,
+        "sam_vit_l": 0.2796614251811083
+      },
+      "sequence_id": "s41",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": 0.5
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -0.3333333333333333,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_l",
+        "sam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.24541652769264827,
+        "sam_vit_b": 0.21160233094443004,
+        "sam_vit_l": 0.21402443401101037
+      },
+      "sequence_id": "s42",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -0.5
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -1.0,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_b",
+        "sam_vit_l"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.22998741403058665,
+        "sam_vit_b": 0.19332212440840957,
+        "sam_vit_l": 0.1699972760223567
+      },
+      "sequence_id": "s43",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -1.0
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -0.3333333333333333,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_l",
+        "sam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.333567746923666,
+        "sam_vit_b": 0.25722491471286174,
+        "sam_vit_l": 0.291425878976559
+      },
+      "sequence_id": "s44",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -0.5
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -0.3333333333333333,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_l",
+        "sam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.41474608631496307,
+        "sam_vit_b": 0.279836325619277,
+        "sam_vit_l": 0.3824026824363606
+      },
+      "sequence_id": "s45",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -0.5
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -1.0,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_b",
+        "sam_vit_l"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.26580950340388765,
+        "sam_vit_b": 0.24328607664841712,
+        "sam_vit_l": 0.23817134132066217
+      },
+      "sequence_id": "s46",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -1.0
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -1.0,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_b",
+        "sam_vit_l"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.29918398625070836,
+        "sam_vit_b": 0.21717373497711398,
+        "sam_vit_l": 0.209207226802992
+      },
+      "sequence_id": "s47",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -1.0
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -0.3333333333333333,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_l",
+        "sam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.29066736480147104,
+        "sam_vit_b": 0.21743260402471995,
+        "sam_vit_l": 0.2297824688163983
+      },
+      "sequence_id": "s48",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -0.5
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -0.3333333333333333,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_l",
+        "sam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.43760083996209964,
+        "sam_vit_b": 0.29071883378103536,
+        "sam_vit_l": 0.34914330256558807
+      },
+      "sequence_id": "s49",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -0.5
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -1.0,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_b",
+        "sam_vit_l"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.47887878770467673,
+        "sam_vit_b": 0.4424582011424582,
+        "sam_vit_l": 0.4181702144987225
+      },
+      "sequence_id": "s50",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -1.0
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -1.0,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_b",
+        "sam_vit_l"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.27355239757051514,
+        "sam_vit_b": 0.24607520124667437,
+        "sam_vit_l": 0.24204972017780302
+      },
+      "sequence_id": "s51",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -1.0
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -1.0,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_b",
+        "sam_vit_l"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.24326722881208318,
+        "sam_vit_b": 0.16889568452538883,
+        "sam_vit_l": 0.1394958030075124
+      },
+      "sequence_id": "s52",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -1.0
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": 0.3333333333333333,
+      "model_order_by_mean_dice": [
+        "sam_vit_l",
+        "medsam_vit_b",
+        "sam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.3257982129038789,
+        "sam_vit_b": 0.2325940223465178,
+        "sam_vit_l": 0.49079609836400173
+      },
+      "sequence_id": "s53",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": 0.5
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": 0.3333333333333333,
+      "model_order_by_mean_dice": [
+        "sam_vit_l",
+        "medsam_vit_b",
+        "sam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.33035034048570255,
+        "sam_vit_b": 0.30997753428630276,
+        "sam_vit_l": 0.34414354672309544
+      },
+      "sequence_id": "s54",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": 0.5
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": 0.3333333333333333,
+      "model_order_by_mean_dice": [
+        "sam_vit_b",
+        "sam_vit_l",
+        "medsam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.1666473464939386,
+        "sam_vit_b": 0.1916899663379421,
+        "sam_vit_l": 0.18477051137947312
+      },
+      "sequence_id": "s55",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": 0.5
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -1.0,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_b",
+        "sam_vit_l"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.33110446822738715,
+        "sam_vit_b": 0.20633686049892558,
+        "sam_vit_l": 0.20576347007012155
+      },
+      "sequence_id": "s56",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -1.0
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -0.3333333333333333,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_l",
+        "sam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.28682470253032777,
+        "sam_vit_b": 0.24100442665885763,
+        "sam_vit_l": 0.2721242199399016
+      },
+      "sequence_id": "s57",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -0.5
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": -0.3333333333333333,
+      "model_order_by_mean_dice": [
+        "medsam_vit_b",
+        "sam_vit_l",
+        "sam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.33207887493894506,
+        "sam_vit_b": 0.2083356503677849,
+        "sam_vit_l": 0.23963827500041282
+      },
+      "sequence_id": "s58",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": -0.5
+    },
+    {
+      "kendall_s2c_synthetic_vs_sequence_mean_dice": 1.0,
+      "model_order_by_mean_dice": [
+        "sam_vit_l",
+        "sam_vit_b",
+        "medsam_vit_b"
+      ],
+      "per_model_mean_dice": {
+        "medsam_vit_b": 0.17803015685282303,
+        "sam_vit_b": 0.19867869525206594,
+        "sam_vit_l": 0.2108345427833849
+      },
+      "sequence_id": "s59",
+      "spearman_s2c_synthetic_vs_sequence_mean_dice": 1.0
+    }
+  ],
+  "sequence_spearman_bootstrap": {
+    "ci95_high": -0.125,
+    "ci95_low": -0.675,
+    "draws": 2000,
+    "mean": -0.425
+  },
+  "synthetic_order_source": "experiments/main/run-angiostress-s2c-third-frozen-model-panel-extension/outputs/model_summary.json"
+}

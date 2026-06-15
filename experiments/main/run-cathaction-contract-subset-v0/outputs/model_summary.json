@@ -1,0 +1,31 @@
+{
+  "rows": [
+    {
+      "cathaction_prediction_nonempty_rate": 1.0,
+      "cathaction_sample_mean_area_ratio": 9.191451020643179,
+      "cathaction_sample_mean_cldice": 0.08705523735746254,
+      "cathaction_sample_mean_dice": 0.09972911041072442,
+      "cathaction_sample_min_cldice": 0.0,
+      "cathaction_sample_min_dice": 0.0,
+      "model_id": "medsam_vit_b"
+    },
+    {
+      "cathaction_prediction_nonempty_rate": 1.0,
+      "cathaction_sample_mean_area_ratio": 11.619459637988667,
+      "cathaction_sample_mean_cldice": 0.4022584581698785,
+      "cathaction_sample_mean_dice": 0.3647474714065172,
+      "cathaction_sample_min_cldice": 0.0,
+      "cathaction_sample_min_dice": 0.02230642739686852,
+      "model_id": "sam_vit_b"
+    },
+    {
+      "cathaction_prediction_nonempty_rate": 1.0,
+      "cathaction_sample_mean_area_ratio": 10.404598252112663,
+      "cathaction_sample_mean_cldice": 0.364272198772832,
+      "cathaction_sample_mean_dice": 0.3463619309851356,
+      "cathaction_sample_min_cldice": 0.0,
+      "cathaction_sample_min_dice": 0.0017263703064307294,
+      "model_id": "sam_vit_l"
+    }
+  ]
+}

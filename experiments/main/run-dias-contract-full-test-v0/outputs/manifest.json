@@ -1,0 +1,772 @@
+{
+  "benchmark_id": "angiostress-v0.1-real-data",
+  "checks": {
+    "finite_frame_metrics": true,
+    "finite_model_summary": true,
+    "finite_ranking_diagnostics": true,
+    "finite_sequence_summary": true,
+    "finite_source_metrics": true,
+    "frame_count_per_model_matches": true,
+    "model_count_matches": true,
+    "no_synthetic_rows_in_core_surface": true,
+    "per_sequence_row_count_matches": true,
+    "prediction_count_matches": true,
+    "sequence_count_matches": true,
+    "source_manifest_sequence_count_matches": true,
+    "surface_role_is_core": true
+  },
+  "command": "python3 benchmark/run_dias_contract_full_test.py --contract benchmark/contracts/angiostress_v0_1_real_data.json --source-dir experiments/analysis/s3b-dias-full-test-split-ranking/outputs --output-dir experiments/main/run-dias-contract-full-test-v0/outputs --copy-artifacts",
+  "copied_artifacts": {
+    "predictions": {
+      "file_count": 345,
+      "size_bytes": 220844160,
+      "source_exists": true
+    }
+  },
+  "expected_counts": {
+    "frame_count_per_model": 115,
+    "model_count": 3,
+    "prediction_count": 345,
+    "sequence_count": 20
+  },
+  "observed_counts": {
+    "frame_count_per_model": 115,
+    "model_count": 3,
+    "per_sequence_summary_rows": 60,
+    "prediction_count": 345,
+    "sequence_count": 20
+  },
+  "run_id": "run-dias-contract-full-test-v0",
+  "source_dir": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs",
+  "source_manifest": {
+    "available_labeled_test_sequence_count": 20,
+    "claim_boundary": "S3a expands DIAS coverage but remains a diagnostic construct-validity precursor: one synthetic TopCoW case, oracle label-box prompting, sequence-level DIAS masks, three frozen promptable models, and no CathAction/device-action analog.",
+    "device": "mps",
+    "dias_zip": "/Users/colin/DeepScientist/quests/010/tmp/datasets/DIAS/DIAS.zip",
+    "dias_zip_sha256": "73577a4b8816e12ed8feaa730befbf8038355f4ba57b14e33fca6ea01fd1f39d",
+    "dias_zip_size_bytes": 292444663,
+    "max_frames_per_sequence": 0,
+    "metric_protocol": "Dice and clDice against DIAS sequence-level binary vessel mask per frame.",
+    "model_checkpoints": [
+      {
+        "checkpoint": "/Users/colin/DeepScientist/quests/010/tmp/angiostress-s1-weights/sam_vit_b_01ec64.pth",
+        "checkpoint_sha256": "ec2df62732614e57411cdcf32a23ffdf28910380d03139ee0f4fcbe91eb8c912",
+        "expected_checkpoint_sha256": "ec2df62732614e57411cdcf32a23ffdf28910380d03139ee0f4fcbe91eb8c912",
+        "model_id": "sam_vit_b",
+        "model_type": "vit_b",
+        "source": "Meta Segment Anything ViT-B checkpoint used in S1/S3."
+      },
+      {
+        "checkpoint": "/Users/colin/DeepScientist/quests/010/tmp/angiostress-s2b-weights/medsam/medsam_vit_b.cpu.pth",
+        "checkpoint_sha256": "ec970b350c62fed9a81855ae4c4532bb0421e0edaa7b7e944a4f7951934753cb",
+        "expected_checkpoint_sha256": "ec970b350c62fed9a81855ae4c4532bb0421e0edaa7b7e944a4f7951934753cb",
+        "model_id": "medsam_vit_b",
+        "model_type": "vit_b",
+        "source": "MedSAM repository README checkpoint folder; official file was CPU-mapped locally for non-CUDA loading."
+      },
+      {
+        "checkpoint": "/Users/colin/DeepScientist/quests/010/tmp/angiostress-s2c-weights/sam/sam_vit_l_0b3195.pth",
+        "checkpoint_sha256": "3adcc4315b642a4d2101128f611684e8734c41232a17c648ed1693702a49a622",
+        "expected_checkpoint_sha256": "3adcc4315b642a4d2101128f611684e8734c41232a17c648ed1693702a49a622",
+        "model_id": "sam_vit_l",
+        "model_type": "vit_l",
+        "source": "Meta Segment Anything official README ViT-L checkpoint URL."
+      }
+    ],
+    "parent_run_id": "run-angiostress-s2c-third-frozen-model-panel-extension",
+    "prompt_protocol": "label_bbox_margin_5",
+    "selected_sequence_ids": [
+      "s40",
+      "s41",
+      "s42",
+      "s43",
+      "s44",
+      "s45",
+      "s46",
+      "s47",
+      "s48",
+      "s49",
+      "s50",
+      "s51",
+      "s52",
+      "s53",
+      "s54",
+      "s55",
+      "s56",
+      "s57",
+      "s58",
+      "s59"
+    ],
+    "selected_sequences": [
+      {
+        "frame_count": 6,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s40_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s40_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s40_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s40_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s40_i4.png"
+          },
+          {
+            "frame_index": 5,
+            "frame_member": "DIAS/test/images/image_s40_i5.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s40.png",
+        "sequence_id": "s40",
+        "split": "test"
+      },
+      {
+        "frame_count": 5,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s41_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s41_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s41_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s41_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s41_i4.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s41.png",
+        "sequence_id": "s41",
+        "split": "test"
+      },
+      {
+        "frame_count": 8,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s42_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s42_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s42_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s42_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s42_i4.png"
+          },
+          {
+            "frame_index": 5,
+            "frame_member": "DIAS/test/images/image_s42_i5.png"
+          },
+          {
+            "frame_index": 6,
+            "frame_member": "DIAS/test/images/image_s42_i6.png"
+          },
+          {
+            "frame_index": 7,
+            "frame_member": "DIAS/test/images/image_s42_i7.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s42.png",
+        "sequence_id": "s42",
+        "split": "test"
+      },
+      {
+        "frame_count": 7,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s43_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s43_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s43_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s43_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s43_i4.png"
+          },
+          {
+            "frame_index": 5,
+            "frame_member": "DIAS/test/images/image_s43_i5.png"
+          },
+          {
+            "frame_index": 6,
+            "frame_member": "DIAS/test/images/image_s43_i6.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s43.png",
+        "sequence_id": "s43",
+        "split": "test"
+      },
+      {
+        "frame_count": 5,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s44_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s44_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s44_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s44_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s44_i4.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s44.png",
+        "sequence_id": "s44",
+        "split": "test"
+      },
+      {
+        "frame_count": 5,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s45_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s45_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s45_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s45_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s45_i4.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s45.png",
+        "sequence_id": "s45",
+        "split": "test"
+      },
+      {
+        "frame_count": 7,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s46_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s46_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s46_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s46_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s46_i4.png"
+          },
+          {
+            "frame_index": 5,
+            "frame_member": "DIAS/test/images/image_s46_i5.png"
+          },
+          {
+            "frame_index": 6,
+            "frame_member": "DIAS/test/images/image_s46_i6.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s46.png",
+        "sequence_id": "s46",
+        "split": "test"
+      },
+      {
+        "frame_count": 7,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s47_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s47_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s47_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s47_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s47_i4.png"
+          },
+          {
+            "frame_index": 5,
+            "frame_member": "DIAS/test/images/image_s47_i5.png"
+          },
+          {
+            "frame_index": 6,
+            "frame_member": "DIAS/test/images/image_s47_i6.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s47.png",
+        "sequence_id": "s47",
+        "split": "test"
+      },
+      {
+        "frame_count": 5,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s48_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s48_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s48_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s48_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s48_i4.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s48.png",
+        "sequence_id": "s48",
+        "split": "test"
+      },
+      {
+        "frame_count": 5,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s49_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s49_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s49_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s49_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s49_i4.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s49.png",
+        "sequence_id": "s49",
+        "split": "test"
+      },
+      {
+        "frame_count": 8,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s50_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s50_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s50_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s50_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s50_i4.png"
+          },
+          {
+            "frame_index": 5,
+            "frame_member": "DIAS/test/images/image_s50_i5.png"
+          },
+          {
+            "frame_index": 6,
+            "frame_member": "DIAS/test/images/image_s50_i6.png"
+          },
+          {
+            "frame_index": 7,
+            "frame_member": "DIAS/test/images/image_s50_i7.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s50.png",
+        "sequence_id": "s50",
+        "split": "test"
+      },
+      {
+        "frame_count": 6,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s51_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s51_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s51_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s51_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s51_i4.png"
+          },
+          {
+            "frame_index": 5,
+            "frame_member": "DIAS/test/images/image_s51_i5.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s51.png",
+        "sequence_id": "s51",
+        "split": "test"
+      },
+      {
+        "frame_count": 4,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s52_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s52_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s52_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s52_i3.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s52.png",
+        "sequence_id": "s52",
+        "split": "test"
+      },
+      {
+        "frame_count": 5,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s53_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s53_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s53_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s53_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s53_i4.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s53.png",
+        "sequence_id": "s53",
+        "split": "test"
+      },
+      {
+        "frame_count": 5,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s54_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s54_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s54_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s54_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s54_i4.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s54.png",
+        "sequence_id": "s54",
+        "split": "test"
+      },
+      {
+        "frame_count": 5,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s55_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s55_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s55_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s55_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s55_i4.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s55.png",
+        "sequence_id": "s55",
+        "split": "test"
+      },
+      {
+        "frame_count": 5,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s56_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s56_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s56_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s56_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s56_i4.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s56.png",
+        "sequence_id": "s56",
+        "split": "test"
+      },
+      {
+        "frame_count": 4,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s57_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s57_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s57_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s57_i3.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s57.png",
+        "sequence_id": "s57",
+        "split": "test"
+      },
+      {
+        "frame_count": 5,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s58_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s58_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s58_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s58_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s58_i4.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s58.png",
+        "sequence_id": "s58",
+        "split": "test"
+      },
+      {
+        "frame_count": 8,
+        "frame_records": [
+          {
+            "frame_index": 0,
+            "frame_member": "DIAS/test/images/image_s59_i0.png"
+          },
+          {
+            "frame_index": 1,
+            "frame_member": "DIAS/test/images/image_s59_i1.png"
+          },
+          {
+            "frame_index": 2,
+            "frame_member": "DIAS/test/images/image_s59_i2.png"
+          },
+          {
+            "frame_index": 3,
+            "frame_member": "DIAS/test/images/image_s59_i3.png"
+          },
+          {
+            "frame_index": 4,
+            "frame_member": "DIAS/test/images/image_s59_i4.png"
+          },
+          {
+            "frame_index": 5,
+            "frame_member": "DIAS/test/images/image_s59_i5.png"
+          },
+          {
+            "frame_index": 6,
+            "frame_member": "DIAS/test/images/image_s59_i6.png"
+          },
+          {
+            "frame_index": 7,
+            "frame_member": "DIAS/test/images/image_s59_i7.png"
+          }
+        ],
+        "label_member": "DIAS/test/labels/label_s59.png",
+        "sequence_id": "s59",
+        "split": "test"
+      }
+    ],
+    "slice_id": "s3b-dias-full-test-split-ranking"
+  },
+  "source_run_id": "s3b-dias-full-test-split-ranking",
+  "surface": {
+    "dataset": "DIAS",
+    "label_schema_boundary": "DIAS labels are sequence-level masks in the current audit. Frame-level evaluation must use an explicit selected-frame or sequence-level protocol rather than pretending independent per-frame labels exist.",
+    "prior_pilot_outputs": [
+      "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/manifest.json",
+      "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json",
+      "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/model_summary.json",
+      "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/per_frame_metrics.json"
+    ],
+    "role": "core",
+    "source_paper": "arXiv:2306.12153",
+    "source_paths": [
+      "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/source_availability_audit.json",
+      "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/dias_sequence_inventory.json",
+      "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/outputs/real_dsa_loader_manifest.json"
+    ],
+    "split_rule": "Use the published DIAS split inventory; test sequences are s40-s59 in the audited local manifest.",
+    "surface_id": "dias_sequence_segmentation",
+    "task": "intracranial artery segmentation in DSA sequences",
+    "validation_checks": [
+      {
+        "json_equals": {
+          "sequence_count": 60,
+          "split_counts.test": 20,
+          "split_counts.training": 30,
+          "split_counts.validation": 10
+        },
+        "path": "experiments/main/run-angiostress-s2-real-dsa-loader-smoke/dias_sequence_inventory.json"
+      },
+      {
+        "finite_metrics": [
+          "s3b_sequence_count",
+          "s3b_frame_count_per_model",
+          "s3b_total_prediction_count",
+          "s3b_model_count",
+          "s3b_finite_metric_check"
+        ],
+        "json_equals": {
+          "s3b_model_count": 3.0,
+          "s3b_sequence_count": 20.0,
+          "s3b_total_prediction_count": 345.0
+        },
+        "path": "experiments/analysis/s3b-dias-full-test-split-ranking/outputs/metrics_summary.json"
+      }
+    ]
+  },
+  "validation_passed": true
+}
